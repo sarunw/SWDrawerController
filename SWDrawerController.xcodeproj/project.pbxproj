@@ -1,0 +1,467 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A0AA172618DEA591001B1AD6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0AA172518DEA591001B1AD6 /* Foundation.framework */; };
+		A0AA172818DEA591001B1AD6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0AA172718DEA591001B1AD6 /* CoreGraphics.framework */; };
+		A0AA172A18DEA591001B1AD6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0AA172918DEA591001B1AD6 /* UIKit.framework */; };
+		A0AA173018DEA591001B1AD6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A0AA172E18DEA591001B1AD6 /* InfoPlist.strings */; };
+		A0AA173218DEA591001B1AD6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A0AA173118DEA591001B1AD6 /* main.m */; };
+		A0AA173618DEA591001B1AD6 /* SWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A0AA173518DEA591001B1AD6 /* SWAppDelegate.m */; };
+		A0AA173818DEA591001B1AD6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0AA173718DEA591001B1AD6 /* Images.xcassets */; };
+		A0AA173F18DEA591001B1AD6 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0AA173E18DEA591001B1AD6 /* XCTest.framework */; };
+		A0AA174018DEA591001B1AD6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0AA172518DEA591001B1AD6 /* Foundation.framework */; };
+		A0AA174118DEA591001B1AD6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0AA172918DEA591001B1AD6 /* UIKit.framework */; };
+		A0AA174918DEA591001B1AD6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A0AA174718DEA591001B1AD6 /* InfoPlist.strings */; };
+		A0AA174B18DEA591001B1AD6 /* SWDrawerControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A0AA174A18DEA591001B1AD6 /* SWDrawerControllerTests.m */; };
+		A0AA175718DEA78E001B1AD6 /* SWDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0AA175618DEA78E001B1AD6 /* SWDrawerController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A0AA174218DEA591001B1AD6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A0AA171A18DEA591001B1AD6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A0AA172118DEA591001B1AD6;
+			remoteInfo = SWDrawerController;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		A0AA172218DEA591001B1AD6 /* SWDrawerController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SWDrawerController.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A0AA172518DEA591001B1AD6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		A0AA172718DEA591001B1AD6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		A0AA172918DEA591001B1AD6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		A0AA172D18DEA591001B1AD6 /* SWDrawerController-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SWDrawerController-Info.plist"; sourceTree = "<group>"; };
+		A0AA172F18DEA591001B1AD6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A0AA173118DEA591001B1AD6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A0AA173318DEA591001B1AD6 /* SWDrawerController-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SWDrawerController-Prefix.pch"; sourceTree = "<group>"; };
+		A0AA173418DEA591001B1AD6 /* SWAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWAppDelegate.h; sourceTree = "<group>"; };
+		A0AA173518DEA591001B1AD6 /* SWAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWAppDelegate.m; sourceTree = "<group>"; };
+		A0AA173718DEA591001B1AD6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		A0AA173D18DEA591001B1AD6 /* SWDrawerControllerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SWDrawerControllerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A0AA173E18DEA591001B1AD6 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		A0AA174618DEA591001B1AD6 /* SWDrawerControllerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SWDrawerControllerTests-Info.plist"; sourceTree = "<group>"; };
+		A0AA174818DEA591001B1AD6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A0AA174A18DEA591001B1AD6 /* SWDrawerControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWDrawerControllerTests.m; sourceTree = "<group>"; };
+		A0AA175518DEA78E001B1AD6 /* SWDrawerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWDrawerController.h; sourceTree = "<group>"; };
+		A0AA175618DEA78E001B1AD6 /* SWDrawerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWDrawerController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A0AA171F18DEA591001B1AD6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A0AA172818DEA591001B1AD6 /* CoreGraphics.framework in Frameworks */,
+				A0AA172A18DEA591001B1AD6 /* UIKit.framework in Frameworks */,
+				A0AA172618DEA591001B1AD6 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A0AA173A18DEA591001B1AD6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A0AA173F18DEA591001B1AD6 /* XCTest.framework in Frameworks */,
+				A0AA174118DEA591001B1AD6 /* UIKit.framework in Frameworks */,
+				A0AA174018DEA591001B1AD6 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A0AA171918DEA591001B1AD6 = {
+			isa = PBXGroup;
+			children = (
+				A0AA172B18DEA591001B1AD6 /* SWDrawerController */,
+				A0AA174418DEA591001B1AD6 /* SWDrawerControllerTests */,
+				A0AA172418DEA591001B1AD6 /* Frameworks */,
+				A0AA172318DEA591001B1AD6 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A0AA172318DEA591001B1AD6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A0AA172218DEA591001B1AD6 /* SWDrawerController.app */,
+				A0AA173D18DEA591001B1AD6 /* SWDrawerControllerTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A0AA172418DEA591001B1AD6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A0AA172518DEA591001B1AD6 /* Foundation.framework */,
+				A0AA172718DEA591001B1AD6 /* CoreGraphics.framework */,
+				A0AA172918DEA591001B1AD6 /* UIKit.framework */,
+				A0AA173E18DEA591001B1AD6 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A0AA172B18DEA591001B1AD6 /* SWDrawerController */ = {
+			isa = PBXGroup;
+			children = (
+				A0AA175418DEA73C001B1AD6 /* SWDrawerController */,
+				A0AA173418DEA591001B1AD6 /* SWAppDelegate.h */,
+				A0AA173518DEA591001B1AD6 /* SWAppDelegate.m */,
+				A0AA173718DEA591001B1AD6 /* Images.xcassets */,
+				A0AA172C18DEA591001B1AD6 /* Supporting Files */,
+			);
+			path = SWDrawerController;
+			sourceTree = "<group>";
+		};
+		A0AA172C18DEA591001B1AD6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A0AA172D18DEA591001B1AD6 /* SWDrawerController-Info.plist */,
+				A0AA172E18DEA591001B1AD6 /* InfoPlist.strings */,
+				A0AA173118DEA591001B1AD6 /* main.m */,
+				A0AA173318DEA591001B1AD6 /* SWDrawerController-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A0AA174418DEA591001B1AD6 /* SWDrawerControllerTests */ = {
+			isa = PBXGroup;
+			children = (
+				A0AA174A18DEA591001B1AD6 /* SWDrawerControllerTests.m */,
+				A0AA174518DEA591001B1AD6 /* Supporting Files */,
+			);
+			path = SWDrawerControllerTests;
+			sourceTree = "<group>";
+		};
+		A0AA174518DEA591001B1AD6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A0AA174618DEA591001B1AD6 /* SWDrawerControllerTests-Info.plist */,
+				A0AA174718DEA591001B1AD6 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A0AA175418DEA73C001B1AD6 /* SWDrawerController */ = {
+			isa = PBXGroup;
+			children = (
+				A0AA175518DEA78E001B1AD6 /* SWDrawerController.h */,
+				A0AA175618DEA78E001B1AD6 /* SWDrawerController.m */,
+			);
+			path = SWDrawerController;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A0AA172118DEA591001B1AD6 /* SWDrawerController */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A0AA174E18DEA591001B1AD6 /* Build configuration list for PBXNativeTarget "SWDrawerController" */;
+			buildPhases = (
+				A0AA171E18DEA591001B1AD6 /* Sources */,
+				A0AA171F18DEA591001B1AD6 /* Frameworks */,
+				A0AA172018DEA591001B1AD6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SWDrawerController;
+			productName = SWDrawerController;
+			productReference = A0AA172218DEA591001B1AD6 /* SWDrawerController.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A0AA173C18DEA591001B1AD6 /* SWDrawerControllerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A0AA175118DEA591001B1AD6 /* Build configuration list for PBXNativeTarget "SWDrawerControllerTests" */;
+			buildPhases = (
+				A0AA173918DEA591001B1AD6 /* Sources */,
+				A0AA173A18DEA591001B1AD6 /* Frameworks */,
+				A0AA173B18DEA591001B1AD6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A0AA174318DEA591001B1AD6 /* PBXTargetDependency */,
+			);
+			name = SWDrawerControllerTests;
+			productName = SWDrawerControllerTests;
+			productReference = A0AA173D18DEA591001B1AD6 /* SWDrawerControllerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A0AA171A18DEA591001B1AD6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = SW;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Sarun Wongpatcharapakorn";
+				TargetAttributes = {
+					A0AA173C18DEA591001B1AD6 = {
+						TestTargetID = A0AA172118DEA591001B1AD6;
+					};
+				};
+			};
+			buildConfigurationList = A0AA171D18DEA591001B1AD6 /* Build configuration list for PBXProject "SWDrawerController" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = A0AA171918DEA591001B1AD6;
+			productRefGroup = A0AA172318DEA591001B1AD6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A0AA172118DEA591001B1AD6 /* SWDrawerController */,
+				A0AA173C18DEA591001B1AD6 /* SWDrawerControllerTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A0AA172018DEA591001B1AD6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A0AA173018DEA591001B1AD6 /* InfoPlist.strings in Resources */,
+				A0AA173818DEA591001B1AD6 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A0AA173B18DEA591001B1AD6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A0AA174918DEA591001B1AD6 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A0AA171E18DEA591001B1AD6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A0AA175718DEA78E001B1AD6 /* SWDrawerController.m in Sources */,
+				A0AA173618DEA591001B1AD6 /* SWAppDelegate.m in Sources */,
+				A0AA173218DEA591001B1AD6 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A0AA173918DEA591001B1AD6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A0AA174B18DEA591001B1AD6 /* SWDrawerControllerTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A0AA174318DEA591001B1AD6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A0AA172118DEA591001B1AD6 /* SWDrawerController */;
+			targetProxy = A0AA174218DEA591001B1AD6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A0AA172E18DEA591001B1AD6 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A0AA172F18DEA591001B1AD6 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		A0AA174718DEA591001B1AD6 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A0AA174818DEA591001B1AD6 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A0AA174C18DEA591001B1AD6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		A0AA174D18DEA591001B1AD6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A0AA174F18DEA591001B1AD6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SWDrawerController/SWDrawerController-Prefix.pch";
+				INFOPLIST_FILE = "SWDrawerController/SWDrawerController-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		A0AA175018DEA591001B1AD6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SWDrawerController/SWDrawerController-Prefix.pch";
+				INFOPLIST_FILE = "SWDrawerController/SWDrawerController-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		A0AA175218DEA591001B1AD6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SWDrawerController.app/SWDrawerController";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SWDrawerController/SWDrawerController-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "SWDrawerControllerTests/SWDrawerControllerTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		A0AA175318DEA591001B1AD6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SWDrawerController.app/SWDrawerController";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SWDrawerController/SWDrawerController-Prefix.pch";
+				INFOPLIST_FILE = "SWDrawerControllerTests/SWDrawerControllerTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A0AA171D18DEA591001B1AD6 /* Build configuration list for PBXProject "SWDrawerController" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A0AA174C18DEA591001B1AD6 /* Debug */,
+				A0AA174D18DEA591001B1AD6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A0AA174E18DEA591001B1AD6 /* Build configuration list for PBXNativeTarget "SWDrawerController" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A0AA174F18DEA591001B1AD6 /* Debug */,
+				A0AA175018DEA591001B1AD6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		A0AA175118DEA591001B1AD6 /* Build configuration list for PBXNativeTarget "SWDrawerControllerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A0AA175218DEA591001B1AD6 /* Debug */,
+				A0AA175318DEA591001B1AD6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A0AA171A18DEA591001B1AD6 /* Project object */;
+}
