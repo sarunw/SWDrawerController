@@ -8,25 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSInteger, SWDrawerSide){
-    SWDrawerSideNone = 0,
-    SWDrawerSideTop,
-};
-
-typedef NS_ENUM(NSInteger, SWDrawerOpenCenterInteractionMode) {
-    SWDrawerOpenCenterInteractionModeNone,
-    SWDrawerOpenCenterInteractionModeFull,
-    SWDrawerOpenCenterInteractionModeNavigationBarOnly,
-};
-
 @interface SWDrawerController : UIViewController
 
-@property (nonatomic, strong) UIViewController *centerViewController;
 @property (nonatomic, strong) UIViewController *topDrawerViewController;
+@property (nonatomic, strong) UIViewController *mainViewController;
 
-@property (nonatomic, assign, readonly) SWDrawerSide openSide;
-@property (nonatomic, assign) CGFloat animationVelocity;
+- (instancetype)initWithMainViewController:(UIViewController *)mainViewController
+                   topDrawerViewController:(UIViewController *)topDrawerViewController;
 
--(id)initWithCenterViewController:(UIViewController *)centerViewController topDrawerViewController:(UIViewController *)topDrawerViewController;
+- (void)openDrawerAnimated:(BOOL)animated completion:(void(^)(BOOL finished))completion;
+- (void)toggleDrawerAnimated:(BOOL)animated completion:(void(^)(BOOL finished))completion;
 
 @end

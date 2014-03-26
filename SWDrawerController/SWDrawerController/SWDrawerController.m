@@ -8,314 +8,176 @@
 
 #import "SWDrawerController.h"
 
-CGFloat const SWDrawerDefaultAnimationVelocity = 840.0f;
-
-static NSString *SWDrawerTopDrawerKey = @"SWDrawerTopDrawer";
-static NSString *SWDrawerCenterKey = @"SWDrawerCenter";
-static NSString *SWDrawerOpenSideKey = @"SWDrawerOpenSide";
-
-@interface SWDrawerCenterContainerView : UIView
-
-@property (nonatomic, assign) SWDrawerOpenCenterInteractionMode centerInteractionMode;
-@property (nonatomic, assign) SWDrawerSide openSide;
-
-@end
-
-@implementation SWDrawerCenterContainerView
-
--(UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
-    UIView *hitView = [super hitTest:point withEvent:event];
-    if(hitView &&
-       self.openSide != SWDrawerSideNone){
-        UINavigationBar * navBar = [self navigationBarContainedWithinSubviewsOfView:self];
-        CGRect navBarFrame = [navBar convertRect:navBar.bounds toView:self];
-        if((self.centerInteractionMode == SWDrawerOpenCenterInteractionModeNavigationBarOnly &&
-            CGRectContainsPoint(navBarFrame, point) == NO) ||
-           self.centerInteractionMode == SWDrawerOpenCenterInteractionModeNone){
-            hitView = nil;
-        }
-    }
-    return hitView;
-}
-
--(UINavigationBar*)navigationBarContainedWithinSubviewsOfView:(UIView*)view{
-    UINavigationBar * navBar = nil;
-    for(UIView * subview in [view subviews]){
-        if([view isKindOfClass:[UINavigationBar class]]){
-            navBar = (UINavigationBar*)view;
-            break;
-        }
-        else {
-            navBar = [self navigationBarContainedWithinSubviewsOfView:subview];
-            if (navBar != nil) {
-                break;
-            }
-        }
-    }
-    return navBar;
-}
-@end
 
 @interface SWDrawerController ()
 
-@property (nonatomic, strong) SWDrawerCenterContainerView * centerContainerView;
-@property (nonatomic, strong) UIView * childControllerContainerView;
-@property (nonatomic, assign, getter = isAnimatingDrawer) BOOL animatingDrawer;
+@property (nonatomic, strong) UIView *mainContainerView;
 
+@property (nonatomic, assign, getter = isOpen) BOOL open;
 
 @end
 
 @implementation SWDrawerController
 
-#pragma mark - Lifecycle
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
-	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-	if (self) {
-        [self commonSetup];
-	}
-	return self;
-}
-
-- (id)initWithCoder:(NSCoder *)aDecoder{
-	self = [super initWithCoder:aDecoder];
-	if (self) {
-        [self commonSetup];
-	}
-	return self;
-}
-
-- (id)initWithCenterViewController:(UIViewController *)centerViewController topDrawerViewController:(UIViewController *)topDrawerViewController
+- (instancetype)initWithMainViewController:(UIViewController *)mainViewController topDrawerViewController:(UIViewController *)topDrawerViewController
 {
-    NSParameterAssert(centerViewController);
     self = [super init];
     if (self) {
-        
+        self.mainViewController = mainViewController;
+        self.topDrawerViewController = topDrawerViewController;
     }
     return self;
 }
 
--(void)commonSetup{
-    self.animationVelocity = SWDrawerDefaultAnimationVelocity;
-//    [self setMaximumLeftDrawerWidth:MMDrawerDefaultWidth];
-//    [self setMaximumRightDrawerWidth:MMDrawerDefaultWidth];
-//    
-//    [self setAnimationVelocity:MMDrawerDefaultAnimationVelocity];
-//    
-//    [self setShowsShadow:YES];
-//    [self setShouldStretchDrawer:YES];
-//    
-//    [self setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
-//    [self setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeNone];
-//    [self setCenterHiddenInteractionMode:MMDrawerOpenCenterInteractionModeNavigationBarOnly];
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.mainViewController beginAppearanceTransition:YES animated:animated];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self.mainViewController endAppearanceTransition];
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    if (self.mainViewController == nil) {
+        [NSException raise:@"Missing mainViewController" format:@"Set the mainViewController before loading  SWDrawerController"];
+    }
+    [self.mainContainerView addSubview:self.mainViewController.view];
+}
+
+- (BOOL)shouldAutomaticallyForwardAppearanceMethods
+{
+    return NO;
 }
 
 #pragma mark - Custom Accessors
+- (UIView *)mainContainerView
+{
+    if (_mainContainerView) {
+        return _mainContainerView;
+    }
+    
+    NSLog(@"%f %f", self.view.bounds.size.width, self.view.bounds.size.height);
+    NSLog(@"%f %f", self.view.frame.size.width, self.view.frame.size.height);
+
+    
+    _mainContainerView = [[UIView alloc] initWithFrame:self.view.bounds];
+    _mainContainerView.backgroundColor = [UIColor orangeColor];
+    _mainContainerView.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
+    [self.view addSubview:_mainContainerView];
+    
+    
+    return _mainContainerView;
+}
+
+- (void)setMainViewController:(UIViewController *)mainViewController
+{
+    if (_mainViewController == mainViewController) {
+        return;
+    }
+    
+    _mainViewController = mainViewController;
+    
+    
+    if (_mainViewController) {
+        [self addChildViewController:_mainViewController];
+        [_mainViewController didMoveToParentViewController:self];
+        
+        
+        if ([self isViewLoaded]) {
+            [_mainViewController beginAppearanceTransition:YES animated:NO];
+            [self.mainContainerView addSubview:_mainViewController.view];
+            [_mainViewController endAppearanceTransition];
+        }
+    }
+}
+
 - (void)setTopDrawerViewController:(UIViewController *)topDrawerViewController
 {
-    [self setDrawerViewController:topDrawerViewController forSide:SWDrawerSideTop];
-}
-
-- (void)setDrawerViewController:(UIViewController *)viewController forSide:(SWDrawerSide)drawerSide{
-    NSParameterAssert(drawerSide != SWDrawerSideNone);
+    UIViewController *oldTopViewController = _topDrawerViewController;
     
-    UIViewController *currentSideViewController = [self sideDrawerViewControllerForSide:drawerSide];
-    if (currentSideViewController != nil) {
-        [currentSideViewController beginAppearanceTransition:NO animated:NO];
-        [currentSideViewController.view removeFromSuperview];
-        [currentSideViewController endAppearanceTransition];
-        [currentSideViewController removeFromParentViewController];
-    }
+    [oldTopViewController.view removeFromSuperview];
+    [oldTopViewController willMoveToParentViewController:nil];
+    [oldTopViewController beginAppearanceTransition:NO animated:NO];
+    [oldTopViewController removeFromParentViewController];
+    [oldTopViewController endAppearanceTransition];
     
-    UIViewAutoresizing autoResizingMask = 0;
-    if (drawerSide == MMDrawerSideLeft) {
-        _leftDrawerViewController = viewController;
-        autoResizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleHeight;
+    _topDrawerViewController = topDrawerViewController;
+    
+    if (_topDrawerViewController) {
+        [self addChildViewController:_topDrawerViewController];
+        [_topDrawerViewController didMoveToParentViewController:self];
         
-    }
-    else if(drawerSide == MMDrawerSideRight){
-        _rightDrawerViewController = viewController;
-        autoResizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
-    }
-    
-    if(viewController){
-        [self addChildViewController:viewController];
-        
-        if((self.openSide == drawerSide) &&
-           [self.childControllerContainerView.subviews containsObject:self.centerContainerView]){
-            [self.childControllerContainerView insertSubview:viewController.view belowSubview:self.centerContainerView];
-            [viewController beginAppearanceTransition:YES animated:NO];
-            [viewController endAppearanceTransition];
+        if ([self isViewLoaded] && self.isOpen) {
+            [_topDrawerViewController beginAppearanceTransition:YES animated:NO];
+            [self.view insertSubview:_topDrawerViewController.view belowSubview:self.mainContainerView];
+            [_topDrawerViewController endAppearanceTransition];
         }
-        else{
-            [self.childControllerContainerView addSubview:viewController.view];
-            [self.childControllerContainerView sendSubviewToBack:viewController.view];
-            [viewController.view setHidden:YES];
-        }
-        [viewController didMoveToParentViewController:self];
-        [viewController.view setAutoresizingMask:autoResizingMask];
-        [viewController.view setFrame:viewController.mm_visibleDrawerFrame];
     }
 }
 
-- (UIView *)childControllerContainerView
+#pragma mark - Public
+- (void)openDrawerAnimated:(BOOL)animated completion:(void (^)(BOOL))completion
 {
-    if(_childControllerContainerView == nil){
-        //Issue #152 (https://github.com/mutualmobile/MMDrawerController/issues/152)
-        //Turns out we have two child container views getting added to the view during init,
-        //because the first request self.view.bounds was kicking off a viewDidLoad, which
-        //caused us to be able to fall through this check twice.
-        //
-        //The fix is to grab the bounds, and then check again that the child container view has
-        //not been created.
-        CGRect childContainerViewFrame = self.view.bounds;
-        if(_childControllerContainerView == nil){
-            _childControllerContainerView = [[UIView alloc] initWithFrame:childContainerViewFrame];
-            [_childControllerContainerView setBackgroundColor:[UIColor clearColor]];
-            [_childControllerContainerView setAutoresizingMask:UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth];
-            [self.view addSubview:_childControllerContainerView];
+    if (self.topDrawerViewController == nil) {
+        // Can't be show if no top view controller
+        return;
+    }
+    
+    [self.topDrawerViewController beginAppearanceTransition:YES animated:NO];
+    [self.view insertSubview:self.topDrawerViewController.view belowSubview:self.mainContainerView];
+    
+    CGRect beginRect = self.mainContainerView.frame;
+    CGRect endRect = beginRect;
+    endRect.origin.y = self.view.bounds.size.height - 50;
+    
+    [UIView animateWithDuration:1 delay:0 usingSpringWithDamping:0.65f initialSpringVelocity:0 options:0 animations:^{
+        self.mainContainerView.frame = endRect;
+    } completion:^(BOOL finished) {
+        [self.topDrawerViewController endAppearanceTransition];
+        self.open = YES;
+        if (completion) {
+            completion(finished);
         }
+    }];
+    
+}
+
+- (void)closeDrawerAnimated:(BOOL)animated completion:(void(^)(BOOL finished))completion
+{
+    CGRect beginRect = self.mainContainerView.frame;
+    CGRect endRect = beginRect;
+    endRect.origin.y = 0;
+    
+    [self.topDrawerViewController beginAppearanceTransition:NO animated:animated];
+    
+    
+    [UIView animateWithDuration:0.2 delay:0 options:0 animations:^{
+                self.mainContainerView.frame = endRect;
+    } completion:^(BOOL finished) {
+        [self.topDrawerViewController endAppearanceTransition];
         
-    }
-    return _childControllerContainerView;
-
-}
-
-#pragma mark - State Restoration
-- (void)encodeRestorableStateWithCoder:(NSCoder *)coder{
-    [super encodeRestorableStateWithCoder:coder];
-    if (self.topDrawerViewController){
-        [coder encodeObject:self.topDrawerViewController forKey:SWDrawerTopDrawerKey];
-    }
-    
-    if (self.centerViewController){
-        [coder encodeObject:self.centerViewController forKey:SWDrawerCenterKey];
-    }
-    
-    [coder encodeInteger:self.openSide forKey:SWDrawerOpenSideKey];
-}
-
-- (void)decodeRestorableStateWithCoder:(NSCoder *)coder{
-    UIViewController *controller;
-    SWDrawerSide openside;
-    
-    [super decodeRestorableStateWithCoder:coder];
-    
-    if ((controller = [coder decodeObjectForKey:SWDrawerTopDrawerKey])){
-        self.topDrawerViewController = controller;
-    }
-    
-    if ((controller = [coder decodeObjectForKey:SWDrawerCenterKey])){
-        self.centerViewController = controller;
-    }
-    
-    if ((openside = [coder decodeIntegerForKey:SWDrawerOpenSideKey])){
+        [self.topDrawerViewController.view removeFromSuperview];
         
-        [self openDrawerSide:openside animated:false completion:nil];
-    }
-}
-
-#pragma mark - Open/Close methods
--(void)openDrawerSide:(SWDrawerSide)drawerSide animated:(BOOL)animated completion:(void (^)(BOOL finished))completion{
-    NSParameterAssert(drawerSide != SWDrawerSideNone);
-    
-    [self openDrawerSide:drawerSide animated:animated velocity:self.animationVelocity animationOptions:UIViewAnimationOptionCurveEaseInOut completion:completion];
-}
-
--(void)openDrawerSide:(SWDrawerSide)drawerSide animated:(BOOL)animated velocity:(CGFloat)velocity animationOptions:(UIViewAnimationOptions)options completion:(void (^)(BOOL finished))completion{
-    NSParameterAssert(drawerSide != SWDrawerSideNone);
-    if (self.isAnimatingDrawer) {
-        if(completion){
-            completion(NO);
+        self.open = NO;
+        if (completion) {
+            completion(finished);
         }
-    }
-    else {
-        self.animatingDrawer = animated;
-        UIViewController * sideDrawerViewController = [self sideDrawerViewControllerForSide:drawerSide];
-        CGRect visibleRect = CGRectIntersection(self.childControllerContainerView.bounds,sideDrawerViewController.view.frame);
-        BOOL drawerFullyCovered = (CGRectContainsRect(self.centerContainerView.frame, visibleRect) ||
-                                   CGRectIsNull(visibleRect));
-        if(drawerFullyCovered){
-            [self prepareToPresentDrawer:drawerSide animated:animated];
-        }
-        
-        if(sideDrawerViewController){
-            CGRect newFrame;
-            CGRect oldFrame = self.centerContainerView.frame;
-            if(drawerSide == MMDrawerSideLeft){
-                newFrame = self.centerContainerView.frame;
-                newFrame.origin.x = self.maximumLeftDrawerWidth;
-            }
-            else {
-                newFrame = self.centerContainerView.frame;
-                newFrame.origin.x = 0-self.maximumRightDrawerWidth;
-            }
-            
-            CGFloat distance = ABS(CGRectGetMinX(oldFrame)-newFrame.origin.x);
-            NSTimeInterval duration = MAX(distance/ABS(velocity),MMDrawerMinimumAnimationDuration);
-            
-            [UIView
-             animateWithDuration:(animated?duration:0.0)
-             delay:0.0
-             options:options
-             animations:^{
-                 [self setNeedsStatusBarAppearanceUpdateIfSupported];
-                 [self.centerContainerView setFrame:newFrame];
-                 [self updateDrawerVisualStateForDrawerSide:drawerSide percentVisible:1.0];
-             }
-             completion:^(BOOL finished) {
-                 //End the appearance transition if it already wasn't open.
-                 if(drawerSide != self.openSide){
-                     [sideDrawerViewController endAppearanceTransition];
-                 }
-                 [self setOpenSide:drawerSide];
-                 
-                 [self resetDrawerVisualStateForDrawerSide:drawerSide];
-                 [self setAnimatingDrawer:NO];
-                 if(completion){
-                     completion(finished);
-                 }
-             }];
-        }
-    }
+    }];
 }
 
-#pragma mark - Helpers
--(UIViewController*)sideDrawerViewControllerForSide:(SWDrawerSide)drawerSide{
-    UIViewController * sideDrawerViewController = nil;
-    if(drawerSide != SWDrawerSideNone){
-        sideDrawerViewController = [self childViewControllerForSide:drawerSide];
+- (void)toggleDrawerAnimated:(BOOL)animated completion:(void (^)(BOOL))completion
+{
+    if (self.isOpen) {
+        [self closeDrawerAnimated:animated completion:completion];
+    } else {
+        [self openDrawerAnimated:animated completion:completion];
     }
-    return sideDrawerViewController;
 }
-
--(UIViewController*)childViewControllerForSide:(SWDrawerSide)drawerSide{
-    UIViewController * childViewController = nil;
-    switch (drawerSide) {
-        case SWDrawerSideTop:
-            childViewController = self.topDrawerViewController;
-            break;
-        case SWDrawerSideNone:
-            childViewController = self.centerViewController;
-            break;
-    }
-    return childViewController;
-}
-
--(void)prepareToPresentDrawer:(SWDrawerSide)drawer animated:(BOOL)animated{
-    SWDrawerSide drawerToHide = SWDrawerSideNone;
-    
-    UIViewController * sideDrawerViewControllerToPresent = [self sideDrawerViewControllerForSide:drawer];
-    UIViewController * sideDrawerViewControllerToHide = [self sideDrawerViewControllerForSide:drawerToHide];
-    
-    [self.childControllerContainerView sendSubviewToBack:sideDrawerViewControllerToHide.view];
-    [sideDrawerViewControllerToHide.view setHidden:YES];
-    [sideDrawerViewControllerToPresent.view setHidden:NO];
-    [self resetDrawerVisualStateForDrawerSide:drawer];
-    [sideDrawerViewControllerToPresent.view setFrame:sideDrawerViewControllerToPresent.mm_visibleDrawerFrame];
-    [self updateDrawerVisualStateForDrawerSide:drawer percentVisible:0.0];
-    [sideDrawerViewControllerToPresent beginAppearanceTransition:YES animated:animated];
-}
-
-
 
 @end

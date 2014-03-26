@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A0226BA118E2C05E00683B57 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A0226BA018E2C05E00683B57 /* Storyboard.storyboard */; };
+		A0226BA518E2C16600683B57 /* SWExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0226BA318E2C16600683B57 /* SWExampleViewController.m */; };
+		A0226BA618E2C16600683B57 /* SWExampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0226BA418E2C16600683B57 /* SWExampleViewController.xib */; };
+		A0226BA918E2C60D00683B57 /* UIViewController+SWDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0226BA818E2C60D00683B57 /* UIViewController+SWDrawerController.m */; };
+		A0226BAC18E2E81E00683B57 /* SWTopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0226BAB18E2E81E00683B57 /* SWTopViewController.m */; };
 		A0AA172618DEA591001B1AD6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0AA172518DEA591001B1AD6 /* Foundation.framework */; };
 		A0AA172818DEA591001B1AD6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0AA172718DEA591001B1AD6 /* CoreGraphics.framework */; };
 		A0AA172A18DEA591001B1AD6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0AA172918DEA591001B1AD6 /* UIKit.framework */; };
@@ -33,6 +38,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A0226BA018E2C05E00683B57 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
+		A0226BA218E2C16600683B57 /* SWExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWExampleViewController.h; sourceTree = "<group>"; };
+		A0226BA318E2C16600683B57 /* SWExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWExampleViewController.m; sourceTree = "<group>"; };
+		A0226BA418E2C16600683B57 /* SWExampleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SWExampleViewController.xib; sourceTree = "<group>"; };
+		A0226BA718E2C60D00683B57 /* UIViewController+SWDrawerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+SWDrawerController.h"; sourceTree = "<group>"; };
+		A0226BA818E2C60D00683B57 /* UIViewController+SWDrawerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+SWDrawerController.m"; sourceTree = "<group>"; };
+		A0226BAA18E2E81E00683B57 /* SWTopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWTopViewController.h; sourceTree = "<group>"; };
+		A0226BAB18E2E81E00683B57 /* SWTopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWTopViewController.m; sourceTree = "<group>"; };
 		A0AA172218DEA591001B1AD6 /* SWDrawerController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SWDrawerController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0AA172518DEA591001B1AD6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A0AA172718DEA591001B1AD6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -113,6 +126,12 @@
 				A0AA175418DEA73C001B1AD6 /* SWDrawerController */,
 				A0AA173418DEA591001B1AD6 /* SWAppDelegate.h */,
 				A0AA173518DEA591001B1AD6 /* SWAppDelegate.m */,
+				A0226BA218E2C16600683B57 /* SWExampleViewController.h */,
+				A0226BA318E2C16600683B57 /* SWExampleViewController.m */,
+				A0226BAA18E2E81E00683B57 /* SWTopViewController.h */,
+				A0226BAB18E2E81E00683B57 /* SWTopViewController.m */,
+				A0226BA418E2C16600683B57 /* SWExampleViewController.xib */,
+				A0226BA018E2C05E00683B57 /* Storyboard.storyboard */,
 				A0AA173718DEA591001B1AD6 /* Images.xcassets */,
 				A0AA172C18DEA591001B1AD6 /* Supporting Files */,
 			);
@@ -153,6 +172,8 @@
 			children = (
 				A0AA175518DEA78E001B1AD6 /* SWDrawerController.h */,
 				A0AA175618DEA78E001B1AD6 /* SWDrawerController.m */,
+				A0226BA718E2C60D00683B57 /* UIViewController+SWDrawerController.h */,
+				A0226BA818E2C60D00683B57 /* UIViewController+SWDrawerController.m */,
 			);
 			path = SWDrawerController;
 			sourceTree = "<group>";
@@ -234,7 +255,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0AA173018DEA591001B1AD6 /* InfoPlist.strings in Resources */,
+				A0226BA618E2C16600683B57 /* SWExampleViewController.xib in Resources */,
 				A0AA173818DEA591001B1AD6 /* Images.xcassets in Resources */,
+				A0226BA118E2C05E00683B57 /* Storyboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,8 +276,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0226BA918E2C60D00683B57 /* UIViewController+SWDrawerController.m in Sources */,
 				A0AA175718DEA78E001B1AD6 /* SWDrawerController.m in Sources */,
+				A0226BA518E2C16600683B57 /* SWExampleViewController.m in Sources */,
 				A0AA173618DEA591001B1AD6 /* SWAppDelegate.m in Sources */,
+				A0226BAC18E2E81E00683B57 /* SWTopViewController.m in Sources */,
 				A0AA173218DEA591001B1AD6 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -452,6 +478,7 @@
 				A0AA175018DEA591001B1AD6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A0AA175118DEA591001B1AD6 /* Build configuration list for PBXNativeTarget "SWDrawerControllerTests" */ = {
 			isa = XCConfigurationList;
@@ -460,6 +487,7 @@
 				A0AA175318DEA591001B1AD6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

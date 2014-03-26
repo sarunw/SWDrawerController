@@ -7,6 +7,9 @@
 //
 
 #import "SWAppDelegate.h"
+#import "SWDrawerController.h"
+#import "SWExampleViewController.h"
+#import "SWTopViewController.h"
 
 @implementation SWAppDelegate
 
@@ -14,6 +17,15 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    SWExampleViewController *mainVC = [[SWExampleViewController alloc] initWithNibName:@"SWExampleViewController" bundle:nil];
+    mainVC.view.backgroundColor = [UIColor redColor];
+    
+    SWTopViewController *topVC = [[SWTopViewController alloc] initWithNibName:@"SWExampleViewController" bundle:nil];
+    topVC.view.backgroundColor = [UIColor greenColor];
+    
+    SWDrawerController *drawerController = [[SWDrawerController alloc] initWithMainViewController:mainVC topDrawerViewController:topVC];
+    self.window.rootViewController = drawerController;
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
