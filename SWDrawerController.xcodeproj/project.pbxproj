@@ -12,7 +12,7 @@
 		A0226BA618E2C16600683B57 /* SWExampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0226BA418E2C16600683B57 /* SWExampleViewController.xib */; };
 		A0226BA918E2C60D00683B57 /* UIViewController+SWDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0226BA818E2C60D00683B57 /* UIViewController+SWDrawerController.m */; };
 		A0226BAC18E2E81E00683B57 /* SWTopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0226BAB18E2E81E00683B57 /* SWTopViewController.m */; };
-		A054E30C18E4AAA20099FE06 /* SWDrawerAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A054E30B18E4AAA20099FE06 /* SWDrawerAnimationController.m */; };
+		A054E30C18E4AAA20099FE06 /* SWDrawerOpenAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A054E30B18E4AAA20099FE06 /* SWDrawerOpenAnimationController.m */; };
 		A0AA172618DEA591001B1AD6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0AA172518DEA591001B1AD6 /* Foundation.framework */; };
 		A0AA172818DEA591001B1AD6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0AA172718DEA591001B1AD6 /* CoreGraphics.framework */; };
 		A0AA172A18DEA591001B1AD6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0AA172918DEA591001B1AD6 /* UIKit.framework */; };
@@ -47,8 +47,8 @@
 		A0226BA818E2C60D00683B57 /* UIViewController+SWDrawerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+SWDrawerController.m"; sourceTree = "<group>"; };
 		A0226BAA18E2E81E00683B57 /* SWTopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWTopViewController.h; sourceTree = "<group>"; };
 		A0226BAB18E2E81E00683B57 /* SWTopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWTopViewController.m; sourceTree = "<group>"; };
-		A054E30A18E4AAA20099FE06 /* SWDrawerAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWDrawerAnimationController.h; sourceTree = "<group>"; };
-		A054E30B18E4AAA20099FE06 /* SWDrawerAnimationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWDrawerAnimationController.m; sourceTree = "<group>"; };
+		A054E30A18E4AAA20099FE06 /* SWDrawerOpenAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWDrawerOpenAnimationController.h; sourceTree = "<group>"; };
+		A054E30B18E4AAA20099FE06 /* SWDrawerOpenAnimationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWDrawerOpenAnimationController.m; sourceTree = "<group>"; };
 		A0AA172218DEA591001B1AD6 /* SWDrawerController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SWDrawerController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0AA172518DEA591001B1AD6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A0AA172718DEA591001B1AD6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -177,8 +177,8 @@
 				A0AA175618DEA78E001B1AD6 /* SWDrawerController.m */,
 				A0226BA718E2C60D00683B57 /* UIViewController+SWDrawerController.h */,
 				A0226BA818E2C60D00683B57 /* UIViewController+SWDrawerController.m */,
-				A054E30A18E4AAA20099FE06 /* SWDrawerAnimationController.h */,
-				A054E30B18E4AAA20099FE06 /* SWDrawerAnimationController.m */,
+				A054E30A18E4AAA20099FE06 /* SWDrawerOpenAnimationController.h */,
+				A054E30B18E4AAA20099FE06 /* SWDrawerOpenAnimationController.m */,
 			);
 			path = SWDrawerController;
 			sourceTree = "<group>";
@@ -287,7 +287,7 @@
 				A0AA173618DEA591001B1AD6 /* SWAppDelegate.m in Sources */,
 				A0226BAC18E2E81E00683B57 /* SWTopViewController.m in Sources */,
 				A0AA173218DEA591001B1AD6 /* main.m in Sources */,
-				A054E30C18E4AAA20099FE06 /* SWDrawerAnimationController.m in Sources */,
+				A054E30C18E4AAA20099FE06 /* SWDrawerOpenAnimationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
