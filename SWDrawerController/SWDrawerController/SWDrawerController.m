@@ -7,29 +7,33 @@
 //
 
 #import "SWDrawerController.h"
-#import "SWDrawerOpenAnimationController.h"
+#import "SWDrawerTransitionDelegate.h"
 
 @interface SWDrawerController ()
 
 @property (nonatomic, assign, getter = isOpen) BOOL open;
 
 // UIViewControllerContextTransitioning
-@property (nonatomic, strong) SWDrawerOpenAnimationController *defaultOpenAnimationController;
+@property (nonatomic, copy) SWCompletionBlock completionBlock;
+@property (nonatomic, strong) SWDrawerTransitionDelegate *defaultOpenAnimationController;
 @property (nonatomic, assign) BOOL isAnimated;
 @property (nonatomic, assign) BOOL isInteractive;
 @property (nonatomic, assign) BOOL transitionWasCancelled;
 @property (nonatomic, assign) SWDrawerControllerOperation currentOperation; // So we know how to handle when completionTransition
+@property (nonatomic, assign) SWDrawerControllerMainViewPosition currentMainViewPosition;
 
 @end
 
 @implementation SWDrawerController
 
+#pragma mark - Lifecycle
 - (instancetype)initWithMainViewController:(UIViewController *)mainViewController topDrawerViewController:(UIViewController *)topDrawerViewController
 {
     self = [super init];
     if (self) {
         self.mainViewController = mainViewController;
         self.topDrawerViewController = topDrawerViewController;
+        self.currentMainViewPosition = SWDrawerControllerMainViewPositionCenter;
     }
     return self;
 }
@@ -60,14 +64,38 @@
     return NO;
 }
 
+- (BOOL)shouldAutomaticallyForwardRotationMethods {
+    return YES;
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    
+}
+
+- (void)viewWillLayoutSubviews
+{
+    [super viewWillLayoutSubviews];
+    
+    NSLog(@"bounf %@", NSStringFromCGRect(self.view.bounds));
+    
+    NSLog(@"main %@", NSStringFromCGRect([self finalFrameForViewController:self.mainViewController]));
+    NSLog(@"top %@", NSStringFromCGRect([self finalFrameForViewController:self.topDrawerViewController]));
+    if (self.currentOperation == SWDrawerControllerOperationNone) {
+        NSLog(@"layout dai");
+        self.mainViewController.view.frame = [self mainViewFrameForPosition:self.currentMainViewPosition];
+        self.topDrawerViewController.view.frame = self.view.bounds;
+    }
+}
+
 #pragma mark - Custom Accessors
-- (SWDrawerOpenAnimationController *)defaultOpenAnimationController
+- (SWDrawerTransitionDelegate *)defaultOpenAnimationController
 {
     if (_defaultOpenAnimationController) {
         return _defaultOpenAnimationController;
     }
     
-    _defaultOpenAnimationController = [[SWDrawerOpenAnimationController alloc] init];
+    _defaultOpenAnimationController = [[SWDrawerTransitionDelegate alloc] init];
     return _defaultOpenAnimationController;
 }
 
@@ -118,31 +146,20 @@
 }
 
 #pragma mark - Public
-- (void)openDrawerAnimated:(BOOL)animated completion:(void (^)(BOOL))completion
+- (void)openDrawerAnimated:(BOOL)animated
 {
-//    if (self.topDrawerViewController == nil) {
-//        // Can't be show if no top view controller
-//        return;
-//    }
-//    
-//    [self.topDrawerViewController beginAppearanceTransition:YES animated:NO];
-//    [self.view insertSubview:self.topDrawerViewController.view belowSubview:self.mainContainerView];
-//    
-//    CGRect beginRect = self.mainContainerView.frame;
-//    CGRect endRect = beginRect;
-//    endRect.origin.y = self.view.bounds.size.height - 50;
-//    
-//    [UIView animateWithDuration:1 delay:0 usingSpringWithDamping:0.65f initialSpringVelocity:0 options:0 animations:^{
-//        self.mainContainerView.frame = endRect;
-//    } completion:^(BOOL finished) {
-//        [self.topDrawerViewController endAppearanceTransition];
-//        self.open = YES;
-//        if (completion) {
-//            completion(finished);
-//        }
-//    }];
+    [self openDrawerAnimated:animated completion:nil];
+}
+
+- (void)openDrawerAnimated:(BOOL)animated completion:(SWCompletionBlock)completion
+{
+    self.isAnimated = animated;
+    self.completionBlock = completion;
     self.currentOperation = SWDrawerControllerOperationOpen;
-    self.defaultOpenAnimationController.operation = SWDrawerControllerOperationOpen;
+    
+    SWDrawerControllerOperation operation = [self operationFromPosition:self.currentMainViewPosition toPosition:SWDrawerControllerMainViewPositionBottom];
+    
+    self.defaultOpenAnimationController.operation = operation;
     [self.topDrawerViewController beginAppearanceTransition:YES animated:NO];
     [self.defaultOpenAnimationController animateTransition:self];
     
@@ -150,26 +167,6 @@
 
 - (void)closeDrawerAnimated:(BOOL)animated completion:(void(^)(BOOL finished))completion
 {
-//    CGRect beginRect = self.mainContainerView.frame;
-//    CGRect endRect = beginRect;
-//    endRect.origin.y = 0;
-//    
-//    [self.topDrawerViewController beginAppearanceTransition:NO animated:animated];
-//    
-//    
-//    [UIView animateWithDuration:0.2 delay:0 options:0 animations:^{
-//                self.mainContainerView.frame = endRect;
-//    } completion:^(BOOL finished) {
-//        [self.topDrawerViewController endAppearanceTransition];
-//        
-//        [self.topDrawerViewController.view removeFromSuperview];
-//        
-//        self.open = NO;
-//        if (completion) {
-//            completion(finished);
-//        }
-//    }];
-    
     self.currentOperation = SWDrawerControllerOperationClose;
     self.defaultOpenAnimationController.operation = SWDrawerControllerOperationClose;
     [self.topDrawerViewController beginAppearanceTransition:NO animated:NO];
@@ -188,6 +185,19 @@
 
 #pragma mark - Private
 #pragma mark - Animation
+- (SWDrawerControllerOperation)operationFromPosition:(SWDrawerControllerMainViewPosition)fromPosition toPosition:(SWDrawerControllerMainViewPosition)toPosition
+{
+    if (fromPosition == SWDrawerControllerMainViewPositionCenter &&
+        toPosition == SWDrawerControllerMainViewPositionBottom) {
+        return SWDrawerControllerOperationOpen;
+    } else if (fromPosition == SWDrawerControllerMainViewPositionBottom &&
+               toPosition == SWDrawerControllerMainViewPositionCenter) {
+        return SWDrawerControllerOperationClose;
+    } else {
+        return SWDrawerControllerOperationNone;
+    }
+}
+
 - (void)animateOperation:(SWDrawerControllerOperation)operation
 {
     if ([self.delegate respondsToSelector:@selector(drawerController:animationControllerForOperation:fromViewController:)]) {
@@ -232,11 +242,21 @@
 {
     if (self.currentOperation == SWDrawerControllerOperationOpen) {
         [self.topDrawerViewController endAppearanceTransition];
+        self.currentMainViewPosition = SWDrawerControllerMainViewPositionBottom;
         self.open = YES;
     } else if (self.currentOperation == SWDrawerControllerOperationClose) {
         [self.topDrawerViewController endAppearanceTransition];
+        self.currentMainViewPosition = SWDrawerControllerMainViewPositionCenter;
         self.open = NO;
     }
+    
+    if (self.completionBlock) {
+        self.completionBlock(didComplete);
+        self.completionBlock = nil;
+    }
+    
+    // Clear state
+    self.currentOperation = SWDrawerControllerOperationNone;
 }
 
 - (UIViewController *)viewControllerForKey:(NSString *)key
@@ -306,6 +326,22 @@
     }
     
     return CGRectZero;
+}
+
+- (CGRect)mainViewFrameForPosition:(SWDrawerControllerMainViewPosition)position
+{
+    CGRect containerViewFrame = self.view.bounds;
+    switch (position) {
+        case SWDrawerControllerMainViewPositionCenter:
+            return containerViewFrame;
+            break;
+        case SWDrawerControllerMainViewPositionBottom:
+            containerViewFrame.origin.y = self.view.bounds.size.height - 50;
+            return containerViewFrame;
+            break;
+        default:
+            return CGRectZero;
+    }
 }
 
 

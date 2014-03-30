@@ -1,27 +1,26 @@
 //
-//  SWDrawerOpenAnimationController.m
+//  SWDrawerTransitionDelegate.m
 //  SWDrawerController
 //
 //  Created by Sarun Wongpatcharapakorn on 28/3/14.
 //  Copyright (c) 2014 Sarun Wongpatcharapakorn. All rights reserved.
 //
 
-#import "SWDrawerOpenAnimationController.h"
+#import "SWDrawerTransitionDelegate.h"
 
-#define kOpenTransitionDuration 0.65f
-#define kCloseTransitionDuration 0.2f
+static CGFloat const SWOpenTransitionDuration = 0.65f;
+static CGFloat const SWCloseTransitionDuration = 0.2f;
+static CGFloat const SWSpringDampling = 0.65f;
 
-#define kSpringDampling 0.65f
-
-@implementation SWDrawerOpenAnimationController
+@implementation SWDrawerTransitionDelegate
 
 #pragma mark - UIViewControllerAnimatedTransitioning
 - (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext
 {
     if (self.operation == SWDrawerControllerOperationOpen) {
-        return kOpenTransitionDuration;
+        return SWOpenTransitionDuration;
     } else if (self.operation == SWDrawerControllerOperationClose) {
-        return kCloseTransitionDuration;
+        return SWCloseTransitionDuration;
     }
     
     return 0;
@@ -47,9 +46,11 @@
     
     NSTimeInterval duration = [self transitionDuration:transitionContext];
     
+    topViewController.view.frame = [transitionContext finalFrameForViewController:topViewController];
+    
     if (self.operation == SWDrawerControllerOperationOpen) {
         [containerView insertSubview:topViewController.view belowSubview:mainViewController.view];
-        [UIView animateWithDuration:duration delay:0 usingSpringWithDamping:kSpringDampling initialSpringVelocity:0 options:0 animations:^{
+        [UIView animateWithDuration:duration delay:0 usingSpringWithDamping:SWSpringDampling initialSpringVelocity:0 options:0 animations:^{
             mainViewController.view.frame = mainViewFinalFrame;
         } completion:^(BOOL finished) {
             if ([transitionContext transitionWasCancelled]) {

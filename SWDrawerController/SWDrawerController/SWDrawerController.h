@@ -15,6 +15,14 @@ typedef NS_ENUM(NSInteger, SWDrawerControllerOperation)
     SWDrawerControllerOperationClose
 };
 
+typedef NS_ENUM(NSInteger, SWDrawerControllerMainViewPosition)
+{
+    SWDrawerControllerMainViewPositionCenter,
+    SWDrawerControllerMainViewPositionBottom
+};
+
+typedef void(^SWCompletionBlock)(BOOL finished);
+
 @class SWDrawerController;
 
 @protocol SWDrawerControllerDelegate <NSObject>
@@ -34,7 +42,9 @@ typedef NS_ENUM(NSInteger, SWDrawerControllerOperation)
 - (instancetype)initWithMainViewController:(UIViewController *)mainViewController
                    topDrawerViewController:(UIViewController *)topDrawerViewController;
 
-- (void)openDrawerAnimated:(BOOL)animated completion:(void(^)(BOOL finished))completion;
-- (void)toggleDrawerAnimated:(BOOL)animated completion:(void(^)(BOOL finished))completion;
+
+- (void)openDrawerAnimated:(BOOL)animated;
+- (void)openDrawerAnimated:(BOOL)animated completion:(SWCompletionBlock)completion;
+- (void)toggleDrawerAnimated:(BOOL)animated completion:(SWCompletionBlock)completion;
 
 @end
