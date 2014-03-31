@@ -10,9 +10,6 @@
 #import "SWDrawerTransitionDelegate.h"
 
 @interface SWDrawerController ()
-
-@property (nonatomic, assign, getter = isOpen) BOOL open;
-
 // UIViewControllerContextTransitioning
 @property (nonatomic, copy) SWCompletionBlock completionBlock;
 @property (nonatomic, strong) SWDrawerTransitionDelegate *defaultOpenAnimationController;
@@ -88,6 +85,26 @@
     }
 }
 
+- (UIViewController *)childViewControllerForStatusBarHidden {
+    if (self.currentMainViewPosition == SWDrawerControllerMainViewPositionCenter) {
+        return self.mainViewController;
+    } else if (self.currentMainViewPosition == SWDrawerControllerMainViewPositionBottom) {
+        return self.topDrawerViewController;
+    } else {
+        return nil;
+    }
+}
+
+- (UIViewController *)childViewControllerForStatusBarStyle {
+    if (self.currentMainViewPosition == SWDrawerControllerMainViewPositionCenter) {
+        return self.mainViewController;
+    } else if (self.currentMainViewPosition == SWDrawerControllerMainViewPositionBottom) {
+        return self.topDrawerViewController;
+    } else {
+        return nil;
+    }
+}
+
 #pragma mark - Custom Accessors
 - (SWDrawerTransitionDelegate *)defaultOpenAnimationController
 {
@@ -137,7 +154,7 @@
         [self addChildViewController:_topDrawerViewController];
         [_topDrawerViewController didMoveToParentViewController:self];
         
-        if ([self isViewLoaded] && self.isOpen) {
+        if ([self isViewLoaded] && self.currentMainViewPosition == SWDrawerControllerMainViewPositionBottom) {
             [_topDrawerViewController beginAppearanceTransition:YES animated:NO];
             [self.view insertSubview:_topDrawerViewController.view belowSubview:self.mainViewController.view];
             [_topDrawerViewController endAppearanceTransition];
@@ -162,7 +179,6 @@
     self.defaultOpenAnimationController.operation = operation;
     [self.topDrawerViewController beginAppearanceTransition:YES animated:NO];
     [self.defaultOpenAnimationController animateTransition:self];
-    
 }
 
 - (void)closeDrawerAnimated:(BOOL)animated completion:(void(^)(BOOL finished))completion
@@ -176,7 +192,7 @@
 
 - (void)toggleDrawerAnimated:(BOOL)animated completion:(void (^)(BOOL))completion
 {
-    if (self.isOpen) {
+    if (self.currentMainViewPosition == SWDrawerControllerMainViewPositionBottom) {
         [self closeDrawerAnimated:animated completion:completion];
     } else {
         [self openDrawerAnimated:animated completion:completion];
@@ -243,11 +259,9 @@
     if (self.currentOperation == SWDrawerControllerOperationOpen) {
         [self.topDrawerViewController endAppearanceTransition];
         self.currentMainViewPosition = SWDrawerControllerMainViewPositionBottom;
-        self.open = YES;
     } else if (self.currentOperation == SWDrawerControllerOperationClose) {
         [self.topDrawerViewController endAppearanceTransition];
         self.currentMainViewPosition = SWDrawerControllerMainViewPositionCenter;
-        self.open = NO;
     }
     
     if (self.completionBlock) {
@@ -257,6 +271,11 @@
     
     // Clear state
     self.currentOperation = SWDrawerControllerOperationNone;
+    
+    // Must be in animation block to respect preferredStatusBarUpdateAnimation
+    [UIView animateWithDuration:0.3 animations:^{
+            [self setNeedsStatusBarAppearanceUpdate];
+    }];
 }
 
 - (UIViewController *)viewControllerForKey:(NSString *)key
